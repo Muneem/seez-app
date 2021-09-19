@@ -7,6 +7,9 @@ function App() {
     const [{ isLoading, hookData = {} }, doFetch] = useGetChuckNoraApproved();
 
     const [search, setSearch] = useState('');
+
+    const [dir, setDir] = useState('ltr');
+
     const handleSearch = () => {
         doFetch({search});
     };
@@ -29,10 +32,16 @@ function App() {
             </Box>
         )
     }
+    const handleDirection = () => {
+        setDir(dir === 'ltr' ?  'rtl' : 'ltr');
+    };
 
     return (
-        <div className='App'>
+        <div className='App' dir={dir}>
             <Flex justifyContent={ 'center' } mt={ '20px' } flexDir={ 'column' } alignItems={ 'center' }>
+                <Flex alignItems={'center'} width={'100%'} p={'20px'}>
+                    <Button onClick={handleDirection}>{dir === 'ltr' ? 'LTR': 'RTL'}</Button>
+                </Flex>
                 <Flex flexDir={'column'}>
                     <Box mb={ '20px' } _hover={{cursor: 'pointer'}} data-test-id='image-container'>
                         <img src={ '/assets/chucknorris.png' } alt={ 'Chuck Noris logo' } width={ '200px' } />
