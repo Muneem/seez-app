@@ -64,7 +64,7 @@ export function useApiHookWrapper(props: IHookProps): HookReturnType<any> {
 
       try {
         res = await mountFn({ isLoading, isFinishedOnce, error, hookData, input });
-      } catch (e) {
+      } catch (e: any) {
         if (!isObsolete) {
           const errorMsg = e?.response?.data?.message || e.message;
 
