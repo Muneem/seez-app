@@ -91,13 +91,15 @@ export function useApiHookWrapper(props: IHookProps): HookReturnType<any> {
       }
     };
 
+
+
     fetchData();
 
     // will run on unmount, example cancellation of promises
     return async () => {
-      isObsolete = true;
       unmountFn && (await unmountFn({ isLoading, isFinishedOnce, error, hookData, input }));
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [input]);
 
   return [{ isLoading, error, isFinishedOnce, hookData }, setInput];

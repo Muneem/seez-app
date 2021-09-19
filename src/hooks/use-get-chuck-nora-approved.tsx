@@ -3,8 +3,10 @@ import { HookReturnType, ICallbackParams, useApiHookWrapper } from './use-api-ho
 
 type Input = unknown;
 type Output = any;
-const mountFn = async () => {
-    const { data } = await axiosRequest({ url: 'https://api.chucknorris.io/jokes/random' });
+const mountFn = async (props: any) => {
+    const {input} = props;
+
+    const { data } = await axiosRequest({ url: 'https://api.chucknorris.io/jokes/search?query=' + input.search });
     return data;
 };
 
@@ -17,6 +19,7 @@ const errorFn = async (props: ICallbackParams<Input, Output>) => {
 };
 
 export const useGetChuckNoraApproved = (): HookReturnType<Input, Output> => {
+
     return useApiHookWrapper({
         initialInput: undefined,
         initialIsLoading: false,
